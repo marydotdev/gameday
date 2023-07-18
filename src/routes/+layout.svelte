@@ -2,4 +2,6 @@
 	import '../app.css';
 </script>
 
-<slot />
+<div class="max-w-6xl mx-auto p-4 font-caveat">
+  <slot />
+</div>

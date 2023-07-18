@@ -12,7 +12,9 @@ module.exports = {
 				tw: '#06B6D4'
 			},
 			fontFamily: {
-				spacemono: ['Space Mono', 'monospace']
+				syne: ['Syne', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
+        raleway: ['Raleway', 'sans-serif']
 			}
 		}
 	},
