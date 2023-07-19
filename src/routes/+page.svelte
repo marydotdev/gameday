@@ -18,26 +18,24 @@
     <h2 class="text-xl">Today's Schedule</h2>
   </div>
 
-  <div class="pb-8 flex gap-4">
-    <p>Sunday</p>
-    <p>Monday</p>
-    <p>Tuesday</p>
-    <p>Wednesday</p>
-    <p>Thursday</p>
-    <p>Friday</p>
-    <p>Saturday</p>
-  </div>
-
 	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8 text-xl">
 		{#each games as game}
     <a href="/{game.gamePk}">
-			<div class="flex flex-col w-52 gap-2">
-				<p>
+			<div class="flex flex-col w-56 gap-2">
+				<div>
+          {#if game.status.abstractGameCode === "L"}
+          <p>In Progress</p>
+          {:else if game.status.abstractGameCode=== "F"}
+          <p>Final</p>
+          {:else}
+          <p>
 					{new Date(game.gameDate).toLocaleTimeString('en-US', {
 						hour: 'numeric',
 						minute: '2-digit'
 					})}
 				</p>
+        {/if}
+        </div>
 				<div class="flex justify-start gap-2">
           <img src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.away.team.id}.svg`} alt="team logo" class="w-6 h-6" />
 					<div class="w-full flex justify-between">
