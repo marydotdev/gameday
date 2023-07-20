@@ -1,10 +1,103 @@
-<script>
+<!-- <script>
 	export let data;
 
 	let games = data.today.dates[0].games;
 	// console.log(games)
-	let apiUrl = 'https://statsapi.mlb.com';
+	// let apiUrl = 'https://statsapi.mlb.com';
+
+  let inProgressGames = [];
+  let upcomingGames = [];
+  let finishedGames = [];
+
+  games.forEach((game) => {
+    if (game.status.abstractGameCode === "L") {
+      inProgressGames.push(game);
+    } else if (game.status.abstractGameCode === "F") {
+      finishedGames.push(game);
+    } else {
+      upcomingGames.push(game);
+    }
+  });
+
+  // Sort the arrays based on the gameDate
+  inProgressGames.sort((a, b) => {
+    return new Date(a.gameDate) - new Date(b.gameDate);
+  });
+
+  upcomingGames.sort((a, b) => {
+    return new Date(a.gameDate) - new Date(b.gameDate);
+  });
+
+  finishedGames.sort((a, b) => {
+    return new Date(b.gameDate) - new Date(a.gameDate);
+  });
+
+  // Concatenate the arrays in the desired order
+  let allGames = [...inProgressGames, ...upcomingGames, ...finishedGames];
+
+</script> -->
+
+<script lang="ts">
+  export let data: any;
+
+  interface Game {
+    gamePk: number;
+    gameDate: string;
+    status: {
+      abstractGameCode: string;
+    };
+    teams: {
+      away: {
+        team: {
+          id: number;
+          name: string;
+        };
+        score?: number;
+      };
+      home: {
+        team: {
+          id: number;
+          name: string;
+        };
+        score?: number;
+      };
+    };
+  }
+
+  let games: Game[] = data.today.dates[0].games;
+  let inProgressGames: Game[] = [];
+  let upcomingGames: Game[] = [];
+  let finishedGames: Game[] = [];
+
+  games.forEach((game: Game) => {
+    if (game.status.abstractGameCode === "L") {
+      inProgressGames.push(game);
+    } else if (game.status.abstractGameCode === "F") {
+      finishedGames.push(game);
+    } else {
+      upcomingGames.push(game);
+    }
+  });
+
+  // Sort the arrays based on the gameDate
+  inProgressGames.sort((a: Game, b: Game) => {
+    return new Date(a.gameDate).getTime() - new Date(b.gameDate).getTime();
+  });
+
+  upcomingGames.sort((a: Game, b: Game) => {
+    return new Date(a.gameDate).getTime() - new Date(b.gameDate).getTime();
+  });
+
+  finishedGames.sort((a: Game, b: Game) => {
+    return new Date(b.gameDate).getTime() - new Date(a.gameDate).getTime();
+  });
+
+  // Concatenate the arrays in the desired order
+  let allGames: Game[] = [...inProgressGames, ...upcomingGames, ...finishedGames];
+
+  // let apiUrl: string = 'https://statsapi.mlb.com';
 </script>
+
 
 <svelte:head>
   <title>Gameday</title>
@@ -18,10 +111,10 @@
     <h2 class="text-xl">Today's Schedule</h2>
   </div>
 
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8 text-xl">
-		{#each games as game}
+	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-8">
+		{#each allGames as game}
     <a href="/{game.gamePk}">
-			<div class="flex flex-col w-56 gap-2">
+			<div class="flex flex-col w-56 gap-2 border-2 border-black">
 				<div>
           {#if game.status.abstractGameCode === "L"}
           <p>In Progress</p>
