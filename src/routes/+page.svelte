@@ -1,42 +1,3 @@
-<!-- <script>
-	export let data;
-
-	let games = data.today.dates[0].games;
-	// console.log(games)
-	// let apiUrl = 'https://statsapi.mlb.com';
-
-  let inProgressGames = [];
-  let upcomingGames = [];
-  let finishedGames = [];
-
-  games.forEach((game) => {
-    if (game.status.abstractGameCode === "L") {
-      inProgressGames.push(game);
-    } else if (game.status.abstractGameCode === "F") {
-      finishedGames.push(game);
-    } else {
-      upcomingGames.push(game);
-    }
-  });
-
-  // Sort the arrays based on the gameDate
-  inProgressGames.sort((a, b) => {
-    return new Date(a.gameDate) - new Date(b.gameDate);
-  });
-
-  upcomingGames.sort((a, b) => {
-    return new Date(a.gameDate) - new Date(b.gameDate);
-  });
-
-  finishedGames.sort((a, b) => {
-    return new Date(b.gameDate) - new Date(a.gameDate);
-  });
-
-  // Concatenate the arrays in the desired order
-  let allGames = [...inProgressGames, ...upcomingGames, ...finishedGames];
-
-</script> -->
-
 <script lang="ts">
   export let data: any;
 
@@ -94,8 +55,6 @@
 
   // Concatenate the arrays in the desired order
   let allGames: Game[] = [...inProgressGames, ...upcomingGames, ...finishedGames];
-
-  // let apiUrl: string = 'https://statsapi.mlb.com';
 </script>
 
 
