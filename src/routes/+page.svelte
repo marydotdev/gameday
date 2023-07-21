@@ -107,7 +107,7 @@
 						{#if game.status.abstractGameCode === 'L'}
 							<p>In Progress</p>
 							<!-- Call the fetchOuts function to get the number of outs -->
-							{#await fetchGameData(game.gamePk)}
+							<!-- {#await fetchGameData(game.gamePk)}
 								<p>Loading...</p>
 							{:then { numOuts, batterCount, runners }}
 								<p>Outs: {numOuts}</p>
@@ -123,7 +123,7 @@
 								{/each}
 							{:catch error}
 								<p>Error fetching game data</p>
-							{/await}
+							{/await} -->
 						{:else if game.status.abstractGameCode === 'F'}
 							<p>Final</p>
 						{:else}
