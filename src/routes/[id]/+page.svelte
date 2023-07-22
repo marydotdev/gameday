@@ -3,14 +3,22 @@
 	const { game } = data;
 
 	let defenseLinescore = game.liveData.linescore.defense;
-  let offenseLinescore = game.liveData.linescore.offense;
+	let numOuts = game.liveData.linescore.outs;
+	let batterCount = `${game.liveData.linescore.balls}-${game.liveData.linescore.strikes}`;
+	let inning = game.liveData.linescore.currentInning;
+	let inningState = game.liveData.linescore.inningState;
+	let bases = `${game.liveData.linescore.offense.first ? 'first' : ''} ${
+		game.liveData.linescore.offense.second ? 'second' : ''
+	} ${game.liveData.linescore.offense.third ? 'third' : ''}`;
 
 	/**
 	 * @param {{ id: any; } | undefined} [player]
 	 */
 	function getPlayerPosition(player) {
 		if (player && player.id) {
-			return Object.keys(defenseLinescore).find((position) => defenseLinescore[position].id === player.id);
+			return Object.keys(defenseLinescore).find(
+				(position) => defenseLinescore[position].id === player.id
+			);
 		}
 		return null;
 	}
@@ -20,16 +28,94 @@
 
 <div>
 	<!-- <h1>{game.gamePk}</h1> -->
-	<p>{game.gameData.teams.away.name} @ {game.gameData.teams.home.name}</p>
+	<div class="flex">
+
+			<div class="w-full py-2 flex flex-col justify-center gap-4 border-2 border-blue-300">
+				<div class="flex justify-start gap-2">
+					<img
+						src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.gameData.teams.away.id}.svg`}
+						alt="team logo"
+						class="w-12 h-12"
+					/>
+					<div class="w-full flex justify-between">
+						<div>{game.gameData.teams.away.name}</div>
+						{#if !game.liveData.linescore.teams.away.runs}
+							<div>0</div>
+						{:else}
+							<div>{game.liveData.linescore.teams.away.runs}</div>
+						{/if}
+					</div>
+				</div>
+				<div class="flex justify-start gap-2">
+					<img
+						src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.gameData.teams.home.id}.svg`}
+						alt="team logo"
+						class="w-12 h-12"
+					/>
+					<div class="w-full flex justify-between">
+						<div>{game.gameData.teams.home.name}</div>
+						{#if !game.liveData.linescore.teams.home.runs}
+							<div>0</div>
+						{:else}
+							<div>{game.liveData.linescore.teams.home.runs}</div>
+						{/if}
+					</div>
+				</div>
+			</div>
+
+
+		<div class="border-2 border-indigo-400 px-4 w-fit flex justify-center items-center">
+			<div class="flex flex-col items-center gap-2">
+				<div class="flex items-center gap-1">
+					{#if inningState === 'Top'}
+						<div class="triangle-up" />
+					{:else if inningState === 'Bottom'}
+						<div class="triangle-down" />
+					{:else if inningState === 'Middle'}
+						<div>Mid</div>
+					{:else if inningState === 'End'}
+						<div>End</div>
+					{/if}
+					<p>{inning}</p>
+				</div>
+				<!-- Display the bases with filled diamonds if a runner is on each base -->
+				<div class="w-10 h-7 relative">
+					<div id="first" class={bases.includes('first') ? 'diamond-filled' : 'diamond'} />
+					<div id="second" class={bases.includes('second') ? 'diamond-filled' : 'diamond'} />
+					<div id="third" class={bases.includes('third') ? 'diamond-filled' : 'diamond'} />
+				</div>
+				<!-- <p>Outs: {numOuts}</p> -->
+				<div class="flex gap-1">
+					{#if numOuts === 1}
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+					{:else if numOuts === 2}
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+					{:else if numOuts === 3}
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black bg-black rounded-full" />
+					{:else}
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+						<div class="w-3 h-3 border-2 border-black rounded-full" />
+					{/if}
+				</div>
+				<p>{batterCount}</p>
+				<!-- <p>{bases}</p> -->
+			</div>
+		</div>
+	</div>
 	<div class="flex gap-2">
-		<p>{game.liveData.linescore.inningState}</p>
-		<p>{game.liveData.linescore.currentInning}</p>
+		<p>{inningState}</p>
+		<p>{inning}</p>
 	</div>
 
 	<div class="flex gap-2">
-		<p>{game.liveData.plays.currentPlay.count.balls}</p>
-		<p>-</p>
-		<p>{game.liveData.plays.currentPlay.count.strikes}</p>
+		<p>{batterCount}</p>
 	</div>
 	<div>
 		{#if game.liveData.linescore.outs === 0}
@@ -44,23 +130,23 @@
 	</div>
 
 	<div class="flex justify-between">
-    <div class="">
-      <img
-        src={`https://midfield.mlbstatic.com/v1/people/${game.liveData.plays.currentPlay.matchup.batter.id}/silo/180`}
-        alt={game.liveData.plays.currentPlay.matchup.batter.fullName}
-        class="w-36 h-36"
-      />
-      <p>{game.liveData.plays.currentPlay.matchup.batter.fullName}</p>
-    </div>
-    <div class="">
-      <img
-        src={`https://midfield.mlbstatic.com/v1/people/${game.liveData.plays.currentPlay.matchup.pitcher.id}/silo/180`}
-        alt={game.liveData.plays.currentPlay.matchup.pitcher.fullName}
-        class="w-36 h-36"
-      />
-      <p>{game.liveData.plays.currentPlay.matchup.pitcher.fullName}</p>
-    </div>
-  </div>
+		<div class="">
+			<img
+				src={`https://midfield.mlbstatic.com/v1/people/${game.liveData.plays.currentPlay.matchup.batter.id}/silo/180`}
+				alt={game.liveData.plays.currentPlay.matchup.batter.fullName}
+				class="w-36 h-36"
+			/>
+			<p>{game.liveData.plays.currentPlay.matchup.batter.fullName}</p>
+		</div>
+		<div class="">
+			<img
+				src={`https://midfield.mlbstatic.com/v1/people/${game.liveData.plays.currentPlay.matchup.pitcher.id}/silo/180`}
+				alt={game.liveData.plays.currentPlay.matchup.pitcher.fullName}
+				class="w-36 h-36"
+			/>
+			<p>{game.liveData.plays.currentPlay.matchup.pitcher.fullName}</p>
+		</div>
+	</div>
 
 	<div class="flex justify-between">
 		<div>
@@ -258,7 +344,8 @@
 			<image
 				href="https://midfield.mlbstatic.com/v1/people/{defenseLinescore.catcher.id}/silo/180"
 				id="catcher"
-				x="357" y="668"
+				x="357"
+				y="668"
 				width="80"
 				height="80"
 			/>
@@ -323,3 +410,52 @@
 
 	<a href="/">back</a>
 </div>
+
+<style>
+	.diamond,
+	.diamond-filled {
+		width: 15px;
+		height: 15px;
+		/* margin: 2px; */
+		border: 2px solid black;
+		background-color: aliceblue;
+		rotate: 45deg;
+	}
+
+	.diamond-filled {
+		background-color: aqua;
+	}
+
+	#first {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+
+	#second {
+		position: absolute;
+		right: 33%;
+	}
+
+	#third {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+
+	.triangle-up {
+		width: 0;
+		height: 0;
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-bottom: 12px solid black;
+	}
+
+	.triangle-down {
+		width: 0;
+		height: 0;
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-top: 12px solid black;
+	}
+</style>
