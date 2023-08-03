@@ -59,7 +59,7 @@
 
 	let apiUrl = 'https://statsapi.mlb.com';
 
-	async function fetchGameData(gamePk) {
+	async function fetchGameData(gamePk: number) {
 		try {
 			const response = await fetch(`${apiUrl}/api/v1.1/game/${gamePk}/feed/live`);
 			const gameData = await response.json();
@@ -107,47 +107,58 @@
 
 <div>
 	<div class="pb-8">
-		<h1 class="text-4xl font-bold">❖ Gameday</h1>
 		<h2 class="text-xl">Today's Schedule</h2>
 	</div>
 
-	<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		{#each allGames as game}
 			<a href="/{game.gamePk}">
-				<div class="flex justify-between w-full border-2 border-black">
-          <div class="w-full py-2 flex flex-col justify-center gap-4 border-2 border-blue-300">
+				<div class="flex justify-between w-full border-2 border-black px-2 bg-zinc-900">
+          <div class="w-full py-2 flex flex-col justify-center gap-4">
             <div class="flex justify-start gap-2">
-						<img
-							src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.away.team.id}.svg`}
-							alt="team logo"
-							class="w-6 h-6"
-						/>
-						<div class="w-full flex justify-between">
-							<div>{game.teams.away.team.name}</div>
-							{#if !game.teams.away.score}
-								<div>0</div>
-							{:else}
-								<div>{game.teams.away.score}</div>
-							{/if}
-						</div>
-					</div>
-					<div class="flex justify-start gap-2">
-						<img
-							src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.home.team.id}.svg`}
-							alt="team logo"
-							class="w-6 h-6"
-						/>
-						<div class="w-full flex justify-between">
-							<div>{game.teams.home.team.name}</div>
-							{#if !game.teams.home.score}
-								<div>0</div>
-							{:else}
-								<div>{game.teams.home.score}</div>
-							{/if}
-						</div>
-					</div>
-        </div>
-					<div class="border-2 border-indigo-400 px-4 w-fit flex justify-center items-center">
+              <img
+                src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.away.team.id}.svg`}
+                alt="team logo"
+                class="w-6 h-6"
+              />
+              <div class="w-full flex justify-between">
+                <div>{game.teams.away.team.name}</div>
+                {#if game.status.abstractGameCode === 'P'}
+                <div></div>
+                {:else}
+                <div>
+                  {#if !game.teams.away.score}
+                  <div>0</div>
+                  {:else}
+                  <div>{game.teams.away.score}</div>
+                  {/if}
+                </div>
+                {/if}
+              </div>
+					  </div>
+            <div class="flex justify-start gap-2">
+              <img
+                src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.home.team.id}.svg`}
+                alt="team logo"
+                class="w-6 h-6"
+              />
+              <div class="w-full flex justify-between">
+                <div>{game.teams.home.team.name}</div>
+                {#if game.status.abstractGameCode === 'P'}
+                <div></div>
+                {:else}
+                <div>
+                  {#if !game.teams.home.score}
+                  <div>0</div>
+                  {:else}
+                  <div>{game.teams.home.score}</div>
+                  {/if}
+                </div>
+                {/if}
+              </div>
+            </div>
+          </div>
+					<div class="py-2 pl-8 pr-4 flex-shrink-0 flex justify-center items-center">
 						{#if game.status.abstractGameCode === 'L'}
 							<!-- Call the fetchOuts function to get the number of outs -->
 							{#await fetchGameData(game.gamePk)}
@@ -178,21 +189,21 @@
 								<!-- <p>Outs: {numOuts}</p> -->
                 <div class="flex gap-1">
                   {#if numOuts === 1}
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
                   {:else if numOuts === 2}
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
                   {:else if numOuts === 3}
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black bg-black rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   {:else}
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
-                  <div class="w-3 h-3 border-2 border-black rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
+                  <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
                   {/if}
                 </div>
 								<p>{batterCount}</p>
@@ -218,18 +229,18 @@
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	.diamond, .diamond-filled {
 		width: 15px;
 		height: 15px;
 		/* margin: 2px; */
-		border: 2px solid black;
-    background-color: aliceblue;
+		border: 2px solid theme(colors.zinc.300);
+    background-color: theme(colors.zinc.700);
 		rotate: 45deg;
 	}
 
   .diamond-filled {
-    background-color: aqua;
+    background-color: theme(colors.zinc.100);
   }
 
 	#first {
@@ -254,7 +265,7 @@
       height: 0;
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
-      border-bottom: 12px solid black;
+      border-bottom: 12px solid theme(colors.zinc.300);
     }
 
     .triangle-down {
@@ -262,7 +273,7 @@
       height: 0;
       border-left: 6px solid transparent;
       border-right: 6px solid transparent;
-      border-top: 12px solid black;
+      border-top: 12px solid theme(colors.zinc.300);
     }
 
 </style>
