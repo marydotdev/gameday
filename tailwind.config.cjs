@@ -5,19 +5,22 @@ module.exports = {
 		extend: {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-				'dot-grid': 'url(https://www.toptal.com/designers/subtlepatterns/uploads/dot-grid.png)'
+				'dot-grid': 'url(https://www.transparenttextures.com/patterns/inflicted.png)',
+				'cork': 'url(https://www.toptal.com/designers/subtlepatterns/uploads/pool_table.png)'
 			},
 			colors: {
 				svelte: '#FF3E00',
 				tw: '#06B6D4'
 			},
 			fontFamily: {
-				syne: ['Syne', 'sans-serif'],
-        caveat: ['Caveat', 'cursive'],
-        raleway: ['Raleway', 'sans-serif']
+        raleway: ['Raleway', 'sans-serif'],
+        bric: ['Bricolage Grotesque', 'sans-serif'],
+        press: ['Press Start 2P', 'cursive'],
+        handjet: ['Handjet', 'sans-serif']
 			}
 		}
 	},
+  darkMode: 'class',
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/forms'),

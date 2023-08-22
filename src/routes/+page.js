@@ -1,5 +1,4 @@
-export const load = ({ fetch }) => {
-
+export const load = ({ fetch  }) => {
   const fetchToday = async () => {
     const res = await fetch('/api/getToday')
     const today = await res.json()

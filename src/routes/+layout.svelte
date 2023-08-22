@@ -1,16 +1,14 @@
 <script>
-	import '../app.css';
+	import ThemeToggle from '$lib/ThemeToggle.svelte';
+  import '../app.css';
 </script>
 
-<div class="mx-auto p-4 text-zinc-100">
-  <div class="pb-4">
-		<a href="/" class="text-4xl font-bold">❖ Gameday</a>
+<div class="w-full h-full text-zinc-900 dark:text-zinc-50 font-handjet">
+  <div class="p-4 w-full flex justify-between">
+		<a href="/" class="text-center text-4xl lg:text-6xl font-bold">
+      <span class="">❖ Gameday</span>
+    </a>
+    <ThemeToggle />
 	</div>
   <slot />
 </div>
-
-<style lang="postcss">
-  :global(html) {
-    background-color: theme(colors.zinc.950);
-  }
-</style>
