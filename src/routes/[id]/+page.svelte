@@ -5,9 +5,12 @@
 	import Pitching from '$lib/Pitching.svelte';
 	import Roster from '$lib/Roster.svelte';
 	import Linescore from '$lib/Linescore.svelte';
+	import Score from '$lib/Score.svelte';
 
 	export let data;
 	const { game } = data;
+
+  const teams = game.gameData.teams
 
   const gameState = game.gameData.status.abstractGameCode;
 
@@ -40,7 +43,7 @@
 		game.liveData.linescore.offense.second ? 'second' : ''
 	} ${game.liveData.linescore.offense.third ? 'third' : ''}`;
 
-  // console.log(inningLinescore)
+  console.log(teams)
 
 	/**
 	 * @param {{ id: any; } | undefined} [player]
@@ -59,25 +62,70 @@
 
 {#if (game.liveData.plays.currentPlay)}
 <div>
-	<!-- <h1>{game.gamePk}</h1> -->
-	<div class="w-full flex">
-		<div class="w-full p-2 flex gap-4">
-      <Linescore {game} {inningLinescore} />
-		</div>
+	<div class="flex justify-between">
+    <!-- <h1>{game.gamePk}</h1> -->
+    <div class="w-48 flex border border-black">
+      <div class="w-full py-2 flex flex-col justify-center gap-4 border-r-2 border-black">
+        <div class="flex items-center justify-start gap-2">
+          <img
+            src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.gameData.teams.away.id}.svg`}
+            alt="team logo"
+            class="w-6 h-6 flex-shrink-0"
+          />
+          <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.away.name}</div> -->
+            <div class="">{game.gameData.teams.away.abbreviation}</div>
+            {#if game.gameData.status.abstractGameCode === 'P'}
+            <div></div>
+            {:else}
+            <div>
+              {#if !game.gameData.teams.away.score}
+              <div>0</div>
+              {:else}
+              <div>{game.gameData.teams.away.score}</div>
+              {/if}
+            </div>
+            {/if}
+          </div>
+        </div>
+        <div class="flex items-center justify-start gap-2">
+          <img
+            src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.gameData.teams.home.id}.svg`}
+            alt="team logo"
+            class="w-6 h-6 flex-shrink-0"
+          />
+          <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.home.name}</div> -->
+            <div class="">{game.gameData.teams.home.abbreviation}</div>
+            {#if game.gameData.status.abstractGameCode === 'P'}
+            <div></div>
+            {:else}
+            <div>
+              {#if !game.gameData.teams.home.score}
+              <div>0</div>
+              {:else}
+              <div>{game.gameData.teams.home.score}</div>
+              {/if}
+            </div>
+            {/if}
+          </div>
+        </div>
+      </div>
 
-		{#if game.gameData.status.abstractGameCode === 'L'}
-      <GameState {inning} {inningState} {numOuts} {bases} {batterCount} />
-		{/if}
-	</div>
+      {#if game.gameData.status.abstractGameCode === 'L'}
+        <GameState {inning} {inningState} {numOuts} {bases} {batterCount} />
+      {/if}
+    </div>
 
-  <!-- Current Matchup -->
-	{#if game.gameData.status.abstractGameCode === 'L'}
-		<div class="flex flex-col gap-12 md:flex-row justify-between items-center">
-      <AtBat {game} {batter} {batterDetails} {batterStats} />
+    <!-- Current Matchup -->
+    {#if game.gameData.status.abstractGameCode === 'L'}
+      <div class="flex flex-col gap-12 md:flex-row justify-between items-center">
+        <AtBat {game} {batter} {batterDetails} {batterStats} />
 
-      <Pitching {game} {pitcher} {pitcherDetails} {pitcherStats} />
-		</div>
-	{/if}
+        <Pitching {game} {pitcher} {pitcherDetails} {pitcherStats} />
+      </div>
+    {/if}
+  </div>
 
 	<div class="flex justify-between gap-4 pt-4">
     <!-- Away Roster -->
