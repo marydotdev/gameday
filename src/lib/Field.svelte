@@ -1031,7 +1031,7 @@
           id="pitcher"
           x="659" y="841" width="250" height="250"
         />
-        <text x="659" y="1140" fill="currentColor">
+        <text x="784" y="1140" fill="currentColor" text-anchor="middle">
           {defenseLinescore.pitcher.fullName}
         </text>
       </g>
@@ -1041,7 +1041,7 @@
           id="catcher"
           x="659" y="1190" width="250" height="250"
         />
-        <text x="659" y="1480" fill="currentColor">
+        <text x="784" y="1480" fill="currentColor" text-anchor="middle">
           {defenseLinescore.catcher.fullName}
         </text>
       </g>
@@ -1051,7 +1051,7 @@
           id="first"
           x="1156" y="762" width="250" height="250"
         />
-        <text x="1156" y="1060" fill="currentColor">
+        <text x="1281" y="1060" fill="currentColor" text-anchor="middle">
           {defenseLinescore.first.fullName}
         </text>
       </g>
@@ -1061,7 +1061,7 @@
           id="second"
           x="859" y="512" width="250" height="250"
         />
-        <text x="859" y="810" fill="currentColor">
+        <text x="984" y="810" fill="currentColor" text-anchor="middle">
           {defenseLinescore.second.fullName}
         </text>
       </g>
@@ -1071,7 +1071,7 @@
           id="shortstop"
           x="459" y="512" width="250" height="250"
         />
-        <text x="459" y="810" fill="currentColor">
+        <text x="584" y="810" fill="currentColor" text-anchor="middle">
           {defenseLinescore.shortstop.fullName}
         </text>
       </g>
@@ -1081,7 +1081,7 @@
           id="third"
           x="162" y="762" width="250" height="250"
         />
-        <text x="162" y="1060" fill="currentColor">
+        <text x="287" y="1060" fill="currentColor" text-anchor="middle">
           {defenseLinescore.third.fullName}
         </text>
       </g>
@@ -1091,7 +1091,7 @@
           id="left"
           x="84" y="371" width="250" height="250"
         />
-        <text x="84" y="670" fill="currentColor">
+        <text x="209" y="670" fill="currentColor" text-anchor="middle">
           {defenseLinescore.left.fullName}
         </text>
       </g>
@@ -1101,7 +1101,7 @@
           id="center"
           x="659" y="198" width="250" height="250"
         />
-        <text x="659" y="490" fill="currentColor">
+        <text x="784" y="490" fill="currentColor" text-anchor="middle">
           {defenseLinescore.center.fullName}
         </text>
       </g>
@@ -1111,7 +1111,7 @@
           id="right"
           x="1234" y="371" width="250" height="250"
         />
-        <text x="1234" y="670" fill="currentColor">
+        <text x="1359" y="670" fill="currentColor" text-anchor="middle">
           {defenseLinescore.right.fullName}
         </text>
       </g>

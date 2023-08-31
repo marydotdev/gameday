@@ -3,11 +3,14 @@
   export let home = false;
   export let away = false;
 
+  $: atBat = game.liveData.plays.currentPlay.matchup.batter
+  // console.log(atBat)
+
 </script>
 
 {#if away}
 <div class="flex flex-col gap-4 w-72">
-	<h3 class="uppercase text-center">Away</h3>
+	<!-- <h3 class="uppercase text-center">Away</h3> -->
 	{#each game.liveData.boxscore.teams.away.battingOrder as batterId}
 		<!-- Retrieve the player object using the batterId -->
 		{#if game.liveData.boxscore.teams.away.players[`ID${batterId}`]}
@@ -36,7 +39,7 @@
 </div>
 {:else if home}
 <div class="flex flex-col gap-4 w-72">
-	<h3 class="uppercase text-center">Home</h3>
+	<!-- <h3 class="uppercase text-center">Home</h3> -->
 	{#each game.liveData.boxscore.teams.home.battingOrder as batterId}
 	<!-- Retrieve the player object using the batterId -->
 		{#if game.liveData.boxscore.teams.home.players[`ID${batterId}`]}

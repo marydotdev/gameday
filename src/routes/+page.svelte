@@ -187,7 +187,7 @@
 									/>
 									<div id="third" class={bases.includes('third') ? 'diamond-filled' : 'diamond'} />
 								</div>
-								<!-- <p>Outs: {numOuts}</p> -->
+
                 <div class="flex gap-1">
                   {#if numOuts === 1}
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>

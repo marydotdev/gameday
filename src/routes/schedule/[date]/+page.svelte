@@ -120,10 +120,10 @@
 		<h2 class="text-xl">Today's Schedule</h2>
 	</div>
 
-	<div class="pb-8">
+	<!-- <div class="pb-8">
 		<label for="gameDate">Select Date: </label>
 		<input type="date" id="gameDate" on:input={upDate} on:change={upDate} bind:value={selectedDate} />
-	</div>
+	</div> -->
 
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xl lg:text-2xl">
 		{#each allGames as game}
