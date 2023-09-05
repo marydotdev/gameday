@@ -15,7 +15,7 @@ module.exports = {
 			fontFamily: {
         raleway: ['Raleway', 'sans-serif'],
         bric: ['Bricolage Grotesque', 'sans-serif'],
-        press: ['Press Start 2P', 'cursive'],
+        press: ["'Press Start 2P'", 'cursive'],
         handjet: ['Handjet', 'sans-serif']
 			}
 		}

@@ -106,17 +106,17 @@
 	<meta name="description" content="Gameday" />
 </svelte:head>
 
-<div class="h-full min-h-screen p-4">
+<div class="h-full min-h-screen">
 	<div class="pb-8">
-		<h2 class="text-xl">Today's Schedule</h2>
+		<h2 class="text-md">Today's Schedule</h2>
 	</div>
 
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xl lg:text-2xl">
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs tracking-tighter">
 		{#each allGames as game}
 			<a href="/{game.gamePk}" class="hover:transform hover:scale-[1.01] transition-all duration-100 ease-in">
 				<div class="flex justify-between w-full border-2 border-black bg-white/20 px-2">
           <div class="w-full py-2 flex flex-col justify-center gap-4">
-            <div class="flex justify-start gap-2">
+            <div class="flex items-center justify-start gap-2">
               <img
                 src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.away.team.id}.svg`}
                 alt="team logo"
@@ -137,7 +137,7 @@
                 {/if}
               </div>
 					  </div>
-            <div class="flex justify-start gap-2">
+            <div class="flex items-center justify-start gap-2">
               <img
                 src={`https://www.mlbstatic.com/team-logos/team-cap-on-light/${game.teams.home.team.id}.svg`}
                 alt="team logo"
