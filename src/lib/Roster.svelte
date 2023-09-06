@@ -9,7 +9,7 @@
 </script>
 
 {#if away}
-<div class="flex flex-col gap-4 w-72">
+<div class="flex flex-col gap-4 text-sm tracking-tighter">
 	<!-- <h3 class="uppercase text-center">Away</h3> -->
 	{#each game.liveData.boxscore.teams.away.battingOrder as batterId}
 		<!-- Retrieve the player object using the batterId -->
@@ -23,14 +23,14 @@
 						/>
 						<div class="flex gap-4 w-full">
 							<div class="flex h-full items-center w-6">
-								<p class="text-lg">{player.jerseyNumber}</p>
+								<p>{player.jerseyNumber}</p>
 							</div>
 							<div class="w-full flex flex-col justify-center">
-								<div class="flex justify-between text-sm">
+								<div class="flex justify-between">
 									<p>{player.position.abbreviation}</p>
 									<p>{player.seasonStats.batting.avg}</p>
 								</div>
-								<p class="text-sm">{player.person.fullName}</p>
+								<p>{player.person.fullName}</p>
 							</div>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 	{/each}
 </div>
 {:else if home}
-<div class="flex flex-col gap-4 w-72">
+<div class="flex flex-col gap-4">
 	<!-- <h3 class="uppercase text-center">Home</h3> -->
 	{#each game.liveData.boxscore.teams.home.battingOrder as batterId}
 	<!-- Retrieve the player object using the batterId -->
@@ -52,14 +52,14 @@
 				/>
 				<div class="flex gap-4 w-full">
 					<div class="flex h-full items-center w-6">
-						<p class="text-xs">{player.jerseyNumber}</p>
+						<p>{player.jerseyNumber}</p>
 					</div>
 					<div class="w-full flex flex-col justify-center">
-						<div class="flex justify-between text-sm">
+						<div class="flex justify-between">
 							<p>{player.position.abbreviation}</p>
 							<p>{player.seasonStats.batting.avg}</p>
 						</div>
-						<p class="text-sm">{player.person.fullName}</p>
+						<p>{player.person.fullName}</p>
 					</div>
 				</div>
 			</div>

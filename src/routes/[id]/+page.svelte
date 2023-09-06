@@ -61,15 +61,15 @@
 
 {#if (game.liveData.plays.currentPlay && gameState === "L")}
   <div class="p-4">
-    <div class="flex justify-between">
-      <div>
+    <div class="flex">
+      <!-- <div>
         {#if game.gameData.status.abstractGameCode === 'L'}
           <div class="flex flex-col gap-12 md:flex-row justify-between items-center">
             <AtBat {game} {batter} {batterDetails} {batterStats} />
           </div>
         {/if}
-      </div>
-      <div class="w-fit flex gap-4 border border-black">
+      </div> -->
+      <div class="flex gap-4">
         <div class="w-full py-2 flex flex-col justify-center gap-4">
           <div class="flex items-center justify-start gap-2">
             <img
@@ -77,7 +77,7 @@
               alt="team logo"
               class="w-6 h-6 flex-shrink-0"
             />
-            <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <div class="flex items-center gap-6 text-left">
               <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.away.name}</div> -->
               <div class="w-16">{game.gameData.teams.away.abbreviation}</div>
               {#if game.gameData.status.abstractGameCode === 'P'}
@@ -99,7 +99,7 @@
               alt="team logo"
               class="w-6 h-6 flex-shrink-0"
             />
-            <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <div class="flex items-center gap-6 text-left">
               <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.home.name}</div> -->
               <div class="w-16">{game.gameData.teams.home.abbreviation}</div>
               {#if game.gameData.status.abstractGameCode === 'P'}
@@ -125,7 +125,7 @@
 
     <div class="flex flex-col md:grid md:grid-cols-3">
       <!-- Field -->
-      <div class="w-full max-w-xl mx-auto md:col-span-2">
+      <div class="w-full max-w-3xl mx-auto md:col-span-2">
         <Field {defenseLinescore} />
       </div>
 

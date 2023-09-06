@@ -3,9 +3,10 @@
   export let batterDetails
   export let batter
   export let batterStats
+  console.log(batterDetails)
 </script>
 
-<div>
+<div class="text-sm">
 	<p class="uppercase text-center">At Bat</p>
 	<div class="flex items-center gap-8 sm:gap-16 md:gap-8">
 		<img
@@ -19,7 +20,7 @@
 				<p>{batter.fullName}</p>
 			</div>
 			<div>
-				<p>{batterDetails.position.abbreviation}</p>
+				<p>{batterDetails?.position.abbreviation}</p>
 			</div>
 			<div class="flex gap-4">
 				<p>{batterStats.avg} AVG</p>

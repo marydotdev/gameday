@@ -62,14 +62,13 @@
 			const gamePromises = games.map((game) => fetchGameData(game.gamePk));
 			const gameDataArray = await Promise.all(gamePromises);
 
-			inProgressGames = inProgressGames.map((game, index) => {
-        return {
-          ...game,
-          liveData: gameDataArray[index]
-        };
-      });
-
-      allGames = [...inProgressGames, ...upcomingGames, ...finishedGames];
+			// Update the allGames array with the fetched data
+			allGames = allGames.map((game, index) => {
+				return {
+					...game,
+					...(gameDataArray[index] || {}) // Merge the fetched data with the existing game object
+				};
+			});
 		} catch (error) {
 			console.error('Error fetching game data for all games', error);
 		}
@@ -138,44 +137,44 @@
             </div>
           </div>
 					<div class="py-2 pl-8 pr-4 flex-shrink-0 flex justify-center items-center">
-						{#if game.status.abstractGameCode === 'L' && game.liveData}
+						{#if game.status.abstractGameCode === 'L'}
 							<!-- Call the fetchOuts function to get the number of outs -->
-							<!-- {#await fetchGameData(game.gamePk)}
+							{#await fetchGameData(game.gamePk)}
 								<p>Loading...</p>
-							{:then { numOuts, batterCount, inningState, inning, bases }} -->
+							{:then { numOuts, batterCount, inningState, inning, bases }}
 							  <div class="flex flex-col items-center gap-2">
                   <div class="flex items-center gap-1">
-                    {#if game.liveData.inningState === 'Top'}
+                    {#if inningState === 'Top'}
                     <div class="triangle-up" />
-                    {:else if game.liveData.inningState === 'Bottom'}
+                    {:else if inningState === 'Bottom'}
                     <div class="triangle-down" />
-                    {:else if game.liveData.inningState === 'Middle'}
+                    {:else if inningState === 'Middle'}
                     <div>Mid</div>
-                    {:else if game.liveData.inningState === 'End'}
+                    {:else if inningState === 'End'}
                     <div>End</div>
                     {/if}
-                    <p>{game.liveData.inning}</p>
+                    <p>{inning}</p>
                   </div>
                 <!-- Display the bases with filled diamonds if a runner is on each base -->
 								<div class="w-10 h-7 relative">
-									<div id="first" class={game.liveData.bases.includes('first') ? 'diamond-filled' : 'diamond'} />
+									<div id="first" class={bases.includes('first') ? 'diamond-filled' : 'diamond'} />
 									<div
 										id="second"
-										class={game.liveData.bases.includes('second') ? 'diamond-filled' : 'diamond'}
+										class={bases.includes('second') ? 'diamond-filled' : 'diamond'}
 									/>
-									<div id="third" class={game.liveData.bases.includes('third') ? 'diamond-filled' : 'diamond'} />
+									<div id="third" class={bases.includes('third') ? 'diamond-filled' : 'diamond'} />
 								</div>
 
                 <div class="flex gap-1">
-                  {#if game.liveData.numOuts === 1}
+                  {#if numOuts === 1}
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
-                  {:else if game.liveData.numOuts === 2}
+                  {:else if numOuts === 2}
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
-                  {:else if game.liveData.numOuts === 3}
+                  {:else if numOuts === 3}
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
                   <div class="w-3 h-3 border-2 border-zinc-300 bg-zinc-300 rounded-full"></div>
@@ -185,12 +184,12 @@
                   <div class="w-3 h-3 border-2 border-zinc-300 rounded-full"></div>
                   {/if}
                 </div>
-								<p>{game.liveData.batterCount}</p>
+								<p>{batterCount}</p>
 								<!-- <p>{bases}</p> -->
                 </div>
-							<!-- {:catch error}
+							{:catch error}
 								<p>Error fetching game data</p>
-							{/await} -->
+							{/await}
 						{:else if game.status.abstractGameCode === 'F'}
 							<p>Final</p>
 						{:else}

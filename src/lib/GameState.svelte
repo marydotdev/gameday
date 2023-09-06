@@ -7,7 +7,7 @@
 
 </script>
 
-<div class="px-4 w-fit flex justify-center items-center">
+<div class="px-4 w-full flex justify-center items-center">
 	<div class="flex flex-col items-center gap-2">
 		<div class="flex items-center gap-1">
 			{#if inningState === 'Top'}
