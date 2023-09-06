@@ -30,7 +30,7 @@
 									<p>{player.position.abbreviation}</p>
 									<p>{player.seasonStats.batting.avg}</p>
 								</div>
-								<p class="text-xl">{player.person.fullName}</p>
+								<p class="text-sm">{player.person.fullName}</p>
 							</div>
 						</div>
 					</div>
@@ -52,14 +52,14 @@
 				/>
 				<div class="flex gap-4 w-full">
 					<div class="flex h-full items-center w-6">
-						<p class="text-lg">{player.jerseyNumber}</p>
+						<p class="text-xs">{player.jerseyNumber}</p>
 					</div>
 					<div class="w-full flex flex-col justify-center">
 						<div class="flex justify-between text-sm">
 							<p>{player.position.abbreviation}</p>
 							<p>{player.seasonStats.batting.avg}</p>
 						</div>
-						<p class="text-xl">{player.person.fullName}</p>
+						<p class="text-sm">{player.person.fullName}</p>
 					</div>
 				</div>
 			</div>

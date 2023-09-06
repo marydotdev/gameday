@@ -1024,7 +1024,7 @@
       <rect id="second" x="804" y="562" width="360" height="200" />
       <rect id="shortstop" x="404" y="562" width="360" height="200" />
     </g>
-    <g class="text-5xl">
+    <g class="text-2xl">
       <g class="group">
         <image
           href="https://midfield.mlbstatic.com/v1/people/{defenseLinescore.pitcher.id}/silo/180"
