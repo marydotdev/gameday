@@ -1,12 +1,11 @@
 <script>
-	import AtBat from '$lib/AtBat.svelte';
-  import Field from '$lib/Field.svelte';
-	import GameState from '$lib/GameState.svelte';
-	import Roster from '$lib/Roster.svelte';
+	import AtBat from '$lib/components/AtBat.svelte';
+  import Field from '$lib/components/Field.svelte';
+	import GameState from '$lib/components/GameState.svelte';
+	import Roster from '$lib/components/Roster.svelte';
 
 	export let data;
 	const { game } = data;
-  // console.log(game)
 
   const teams = game?.gameData?.teams ?? {};
 
@@ -40,8 +39,6 @@
   } ${linescore?.offense?.third ? 'third' : ''}`;
   let awayScore = linescore?.teams?.away?.runs ?? 0;
   let homeScore = linescore?.teams?.home?.runs ?? 0;
-
-  // console.log(teams)
 
 	/**
 	 * @param {{ id: any; } | undefined} [player]
@@ -152,9 +149,9 @@
               alt="team logo"
               class="w-6 h-6 flex-shrink-0"
             />
-            <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <div class="flex items-center gap-6 text-left">
               <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.away.name}</div> -->
-              <div class="w-48">{game.gameData.teams.away.name}</div>
+              <div class="w-64">{game.gameData.teams.away.name}</div>
               {#if game.gameData.status.abstractGameCode === 'P'}
               <div></div>
               {:else}
@@ -174,9 +171,9 @@
               alt="team logo"
               class="w-6 h-6 flex-shrink-0"
             />
-            <div class="flex items-center gap-6 text-left text-lg md:text-xl">
+            <div class="flex items-center gap-6 text-left">
               <!-- <div class="w-48 text-left text-lg md:text-xl">{game.gameData.teams.home.name}</div> -->
-              <div class="w-48">{game.gameData.teams.home.name}</div>
+              <div class="w-64">{game.gameData.teams.home.name}</div>
               {#if game.gameData.status.abstractGameCode === 'P'}
               <div></div>
               {:else}
