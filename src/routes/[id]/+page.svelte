@@ -66,7 +66,7 @@
           </div>
         {/if}
       </div> -->
-      <div class="flex gap-4">
+      <div class="flex gap-4 ml-auto">
         <div class="w-full py-2 flex flex-col justify-center gap-4">
           <div class="flex items-center justify-start gap-2">
             <img
@@ -120,13 +120,8 @@
       </div>
     </div>
 
-    <div class="flex flex-col md:grid md:grid-cols-3">
-      <!-- Field -->
-      <div class="w-full max-w-3xl mx-auto md:col-span-2">
-        <Field {defenseLinescore} />
-      </div>
-
-      <div class="mx-auto md:col-span-1 md:ml-auto">
+    <div class="pt-12 flex flex-col gap-12 md:grid md:grid-cols-3 md:gap-4">
+      <div class="mx-auto md:col-span-1">
         {#if inningState === 'Top'}
         <!-- Away Roster -->
         <Roster {game} away={true} />
@@ -134,6 +129,10 @@
         <!-- Home Roster -->
         <Roster {game} home={true} />
         {/if}
+      </div>
+      <!-- Field -->
+      <div class="w-full max-w-xl mx-auto md:col-span-2">
+        <Field {defenseLinescore} />
       </div>
     </div>
   </div>

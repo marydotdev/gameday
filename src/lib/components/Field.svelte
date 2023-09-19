@@ -1,5 +1,13 @@
 <script>
   export let defenseLinescore
+
+  function formatName(fullName) {
+    const nameParts = fullName.split(' ');
+    const firstInitial = nameParts[0][0];
+    const lastName = nameParts[nameParts.length - 1];
+    return `${firstInitial}. ${lastName}`;
+  }
+
 </script>
 <svg width="100%" height="100%" viewBox="0 0 1584 1552" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="Diamond">
@@ -1032,7 +1040,7 @@
           x="659" y="841" width="250" height="250"
         />
         <text x="784" y="1140" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.pitcher.fullName}
+          {formatName(defenseLinescore.pitcher.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1042,7 +1050,7 @@
           x="659" y="1190" width="250" height="250"
         />
         <text x="784" y="1480" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.catcher.fullName}
+          {formatName(defenseLinescore.catcher.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1052,7 +1060,7 @@
           x="1156" y="762" width="250" height="250"
         />
         <text x="1281" y="1060" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.first.fullName}
+          {formatName(defenseLinescore.first.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1062,7 +1070,7 @@
           x="859" y="512" width="250" height="250"
         />
         <text x="984" y="810" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.second.fullName}
+          {formatName(defenseLinescore.second.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1072,7 +1080,7 @@
           x="459" y="512" width="250" height="250"
         />
         <text x="584" y="810" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.shortstop.fullName}
+          {formatName(defenseLinescore.shortstop.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1082,7 +1090,7 @@
           x="162" y="762" width="250" height="250"
         />
         <text x="287" y="1060" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.third.fullName}
+          {formatName(defenseLinescore.third.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1092,7 +1100,7 @@
           x="84" y="371" width="250" height="250"
         />
         <text x="209" y="670" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.left.fullName}
+          {formatName(defenseLinescore.left.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1102,7 +1110,7 @@
           x="659" y="198" width="250" height="250"
         />
         <text x="784" y="490" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.center.fullName}
+          {formatName(defenseLinescore.center.fullName)}
         </text>
       </g>
       <g class="group">
@@ -1112,7 +1120,7 @@
           x="1234" y="371" width="250" height="250"
         />
         <text x="1359" y="670" fill="currentColor" text-anchor="middle">
-          {defenseLinescore.right.fullName}
+          {formatName(defenseLinescore.right.fullName)}
         </text>
       </g>
     </g>
